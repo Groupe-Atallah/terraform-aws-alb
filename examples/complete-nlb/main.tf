@@ -92,8 +92,9 @@ module "nlb" {
     }
 
     ex-three = {
-      port     = 83
-      protocol = "TCP"
+      port                     = 83
+      protocol                 = "TCP"
+      tcp_idle_timeout_seconds = 60
       forward = {
         target_group_key = "ex-target-three"
       }
@@ -162,6 +163,7 @@ module "nlb" {
       target_id   = aws_instance.this.id
       target_health_state = {
         enable_unhealthy_connection_termination = false
+        unhealthy_draining_interval             = 600
       }
     }
   }
